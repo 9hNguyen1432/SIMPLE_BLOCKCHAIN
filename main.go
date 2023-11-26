@@ -31,7 +31,7 @@ func main() {
 		switch choice {
 		case "1":
 			fmt.Print("Enter transaction data: ")
-			data, _ := reader.ReadString('\n')
+			// data, _ := reader.ReadString('\n')
 			// demo menu
 			// TODO: add transaction to blockchain
 

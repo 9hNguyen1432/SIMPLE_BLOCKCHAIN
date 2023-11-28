@@ -1,4 +1,4 @@
-package models
+package blockchain
 
 import (
 	"crypto/sha256"
@@ -11,24 +11,21 @@ type Block struct {
 	Hash          []byte
 }
 
-// TODO: Implement this function to add a new transaction to the block
-
-// To do that, use the SetHash function. Feed the PrevBlockHash, Transactions, and Timestamp into the hash in this order
-// concatenate them, and calculate a SHA256 hash on the concatenated combination.
+// Hash function for Block struct, return string hash
+func (b *Block) GetHash() []byte {
+	return b.Hash
+}
 
 func (b *Block) SetHash() {
 	timestamp := []byte(string(b.Timestamp))
 
-	var transactionsData []byte
-	for _, tx := range b.Transactions {
-		// Convert each transaction to bytes and concatenate
-		// You might need to define the serialization of your transaction data
-		// For example, JSON or other encoding format
-		transactionsData = append(transactionsData, tx.Data...)
-	}
+	// create a MerkleTree from the transactions
+	merkleTree := NewMerkleTree(b.Transactions)
 
+	var transactionsData []byte
 	// Concatenate PrevBlockHash, Transactions, and Timestamp
-	data := append(b.PrevBlockHash, transactionsData...)
+	data := append(transactionsData, b.PrevBlockHash...)
+	data = append(data, merkleTree.RootNode.Data...)
 	data = append(data, timestamp...)
 
 	// Calculate SHA256 hash

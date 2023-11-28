@@ -5,16 +5,16 @@ import (
 )
 
 type Blockchain struct {
-	blocks []*Block
+	Blocks []*Block
 }
 
 // get last block
 func (bc *Blockchain) GetLastBlock() *Block {
-	if bc.blocks == nil {
-		bc.blocks = []*Block{}
+	if bc.Blocks == nil {
+		bc.Blocks = []*Block{}
 		return nil
 	}
-	return bc.blocks[len(bc.blocks)-1]
+	return bc.Blocks[len(bc.Blocks)-1]
 }
 
 func (bc *Blockchain) AddBlock(transactions []*Transaction) {
@@ -28,7 +28,7 @@ func (bc *Blockchain) AddBlock(transactions []*Transaction) {
 	}
 
 	newBlock := NewBlock(transactions, preHash)
-	bc.blocks = append(bc.blocks, newBlock)
+	bc.Blocks = append(bc.Blocks, newBlock)
 }
 
 func NewBlock(transactions []*Transaction, prevHash []byte) *Block {

@@ -5,18 +5,14 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	blockchain "github.com/simple_blockchain/models"
 )
 
 func main() {
-	// transaction := models.Transaction{
-	// 	Data: []byte("Hello World!"),
-	// }
-
-	// fmt.Println(string(transaction.Data))
-
 	for {
 		fmt.Println("=== Simple Blockchain Menu ===")
-		fmt.Println("1. Add new transaction")
+		fmt.Println("1. Add new block")
 		fmt.Println("2. See latest block")
 		fmt.Println("3. See all blocks")
 		fmt.Println("4. Exit")
@@ -28,10 +24,21 @@ func main() {
 
 		switch choice {
 		case "1":
-			fmt.Print("Enter transaction data: ")
-			// data, _ := reader.ReadString('\n')
-			// demo menu
+			var numTxs int
+			fmt.Print("*Enter block data: ")
 			// TODO: add transaction to blockchain
+			// input transactions number of transaction
+			fmt.Print(" --Enter number of transactions: ")
+			fmt.Scanln(&numTxs)
+
+			var transactions []blockchain.Transaction
+			for i := 0; i < numTxs; i++ {
+				var txHash []byte
+				fmt.Print("Tx ", i, ": ")
+				fmt.Scanln(&txHash)
+				transaction := blockchain.Transaction{Data: txHash}
+				transactions = append(transactions, transaction)
+			}
 
 			fmt.Println("Transaction added successfully!")
 		case "2":

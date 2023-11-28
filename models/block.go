@@ -12,11 +12,6 @@ type Block struct {
 	Hash          []byte
 }
 
-// Hash function for Block struct, return string hash
-func (b *Block) GetHash() []byte {
-	return b.Hash
-}
-
 func (b *Block) SetHash() {
 	timestamp := []byte(fmt.Sprintf("%d", b.Timestamp))
 

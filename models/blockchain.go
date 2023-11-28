@@ -1,6 +1,8 @@
 package blockchain
 
-import "time"
+import (
+	"time"
+)
 
 type Blockchain struct {
 	blocks []*Block
@@ -8,12 +10,24 @@ type Blockchain struct {
 
 // get last block
 func (bc *Blockchain) GetLastBlock() *Block {
+	if bc.blocks == nil {
+		bc.blocks = []*Block{}
+		return nil
+	}
 	return bc.blocks[len(bc.blocks)-1]
 }
 
 func (bc *Blockchain) AddBlock(transactions []*Transaction) {
 	prevBlock := bc.GetLastBlock()
-	newBlock := NewBlock(transactions, prevBlock.GetHash())
+
+	var preHash []byte
+	if prevBlock == nil {
+		preHash = make([]byte, 32)
+	} else {
+		preHash = prevBlock.Hash
+	}
+
+	newBlock := NewBlock(transactions, preHash)
 	bc.blocks = append(bc.blocks, newBlock)
 }
 

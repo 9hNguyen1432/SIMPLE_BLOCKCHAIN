@@ -2,6 +2,7 @@ package blockchain
 
 import (
 	"crypto/sha256"
+	"fmt"
 )
 
 type Block struct {
@@ -17,7 +18,7 @@ func (b *Block) GetHash() []byte {
 }
 
 func (b *Block) SetHash() {
-	timestamp := []byte(string(b.Timestamp))
+	timestamp := []byte(fmt.Sprintf("%d", b.Timestamp))
 
 	// create a MerkleTree from the transactions
 	merkleTree := NewMerkleTree(b.Transactions)

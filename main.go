@@ -3,7 +3,9 @@ package main
 import (
 	"bufio"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strings"
 
@@ -22,8 +24,26 @@ func printBlock(block *pkBlockChain.Block) {
 	}
 }
 
+func readDataFromFile() *pkBlockChain.Blockchain {
+	file, err := ioutil.ReadFile("blockchain.json")
+	if err != nil {
+		fmt.Println("Lỗi khi mở file:", err)
+		return nil
+	}
+
+	var blockchain pkBlockChain.Blockchain
+	err = json.Unmarshal(file, &blockchain.Blocks)
+	if err != nil {
+		fmt.Println("Lỗi khi giải mã JSON:", err)
+		return nil
+	}
+
+	return &blockchain
+}
+
 func main() {
 	var blockChain pkBlockChain.Blockchain
+	blockChain = *readDataFromFile()
 
 	for {
 		fmt.Println("=== Simple Blockchain Menu ===")

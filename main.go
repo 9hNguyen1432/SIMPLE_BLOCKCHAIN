@@ -14,6 +14,7 @@ func main() {
 	// init NewGenesisBlock(genesisData []byte) *Block with genesisData
 	blockchain := models.NewBlockchain([]byte("Genesis Block"))
 	for {
+		fmt.Printf("\x1bc")
 		fmt.Println("=== Simple Blockchain Menu ===")
 		fmt.Println("1. Add new transactions")
 		fmt.Println("2. See block")
@@ -27,6 +28,7 @@ func main() {
 
 		switch choice {
 		case "1":
+			fmt.Printf("\x1bc")
 			fmt.Println("Enter transaction data: ")
 
 			// demo menu
@@ -35,6 +37,7 @@ func main() {
 
 			fmt.Println("Transaction added successfully!")
 		case "2":
+			fmt.Printf("\x1bc")
 			fmt.Println("=== Latest Block ===")
 			printLatestBlock(blockchain)
 			Blocks:=blockchain.GetBlocks()
@@ -51,13 +54,14 @@ func main() {
 				switch schoice {
 					case "1":
 						if i<0 {
+							fmt.Printf("\x1bc")
 							fmt.Println("No block before")
 							
 						}else{
-						fmt.Println("*Block information: \n")
-						printBlock(Blocks[i])
-						i--
-						fmt.Println(i)
+							fmt.Printf("\x1bc")	
+							fmt.Println("*Block information: \n")
+							printBlock(Blocks[i])
+							i--
 						}
 					case"2":
 					// to do verify block
@@ -69,9 +73,13 @@ func main() {
 					
 			}
 		case "3":
+			fmt.Printf("\x1bc")
 			fmt.Println("=== Blockchain ===")
 			// TODO: print all blocks in the blockchain
+			
 			printAllBlocks(blockchain)
+			fmt.Print("Press 'Enter' to continue...")
+  			bufio.NewReader(os.Stdin).ReadBytes('\n') 
 		case "4":
 			fmt.Println("Exiting...")
 			return

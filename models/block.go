@@ -3,6 +3,7 @@ package models
 import (
 	"bytes"
 	"crypto/sha256"
+	"fmt"
 	"time"
 )
 
@@ -104,4 +105,11 @@ func (b *Block) GetMerkleProof() []byte {
 
 	// The last remaining hash in the transactionHashes list is the Merkle root
 	return transactionHashes[0]
+}
+
+func DisplayTransactions(b *Block) {
+	fmt.Println("Transactions:")
+	for index, tx := range b.Transactions {
+		fmt.Printf("\t%d. %s \n", index, tx.toStr())
+	}
 }

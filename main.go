@@ -111,7 +111,7 @@ func inputTransactionData() *models.Block {
 		amount, _ := reader.ReadString('\n')
 		amount = strings.TrimSpace(amount)
 
-		data := []byte(sender + receiver + amount)
+		data := []byte(sender + " transfer " + receiver + ": " + amount)
 
 		transactions = append(transactions, models.NewTransaction(data))
 
@@ -148,5 +148,6 @@ func printAllBlocks(blockchain *models.Blockchain) {
 
 func printBlock(block *models.Block) {
 
-	fmt.Printf("Block: - time: %d - transaction: %s - Hash: %s - MerkleProof: %s - PrevBlockHash: %s\n", block.Timestamp, block.Transactions, block.Hash, block.MerkleProof, block.PrevBlockHash)
+	fmt.Printf("Block: \n-Time: %d \n-Hash: %s \n-MerkleProof: %s \n-PrevBlockHash: %s\n", block.Timestamp, block.Hash, block.MerkleProof, block.PrevBlockHash)
+	models.DisplayTransactions(block)
 }

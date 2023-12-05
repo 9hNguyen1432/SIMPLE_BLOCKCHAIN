@@ -6,10 +6,11 @@ import (
 )
 
 type Block struct {
-	Timestamp     int64
-	Transactions  []*Transaction
-	PrevBlockHash []byte
-	Hash          []byte
+	Timestamp      int64
+	Transactions   []*Transaction
+	PrevBlockHash  []byte
+	Hash           []byte
+	MerkleRootNode *MerkleNode
 }
 
 func (b *Block) SetHash() {
@@ -27,4 +28,24 @@ func (b *Block) SetHash() {
 	// Calculate SHA256 hash
 	hash := sha256.Sum256(data)
 	b.Hash = hash[:]
+
+	b.MerkleRootNode = merkleTree.RootNode
+}
+
+func (b *Block) GetHash() []byte {
+	return b.Hash
+}
+
+func (block *Block) VerifyTransaction(indexTransaction int) bool {
+	// Check if the specified transaction index exists
+	if indexTransaction < 0 || indexTransaction >= len(block.Transactions) {
+		return false
+	}
+
+	// Verify the transaction using the Merkle Tree
+	merkleTree := NewMerkleTree(block.Transactions)
+	rootHash := merkleTree.RootNode.Data
+
+	// Compare the calculated root hash with the stored Merkle Root in the block
+	return string(rootHash) == string(block.MerkleRootNode.Data)
 }

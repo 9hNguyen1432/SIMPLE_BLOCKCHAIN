@@ -1,7 +1,6 @@
 package models
 
 import (
-	"bytes"
 	"crypto/sha256"
 	"fmt"
 	"time"
@@ -51,6 +50,8 @@ func (b *Block) SetHash() {
 	var transactionsData []byte
 	transactionsData = b.HashTransactions()
 
+	// create a MerkleTree from the transactions
+
 	// Concatenate PrevBlockHash, Transactions, and Timestamp
 	data := append(b.PrevBlockHash, transactionsData...)
 	data = append(data, timestamp...)
@@ -61,20 +62,10 @@ func (b *Block) SetHash() {
 }
 
 func (b *Block) HashTransactions() []byte {
-	var transactionsData [][]byte
-	for _, tx := range b.Transactions {
-		// Convert each transaction to bytes and append
-		// You might need to define the serialization of your transaction data
-		// For example, JSON or other encoding format
-		transactionsData = append(transactionsData, tx.Data)
-	}
 
-	// Concatenate transactions
-	data := bytes.Join(transactionsData, []byte{})
-
+	merkleTree := NewMerkleTree(b.Transactions)
 	// Calculate SHA256 hash
-	hash := sha256.Sum256(data)
-	return hash[:]
+	return merkleTree.RootNode.Data
 }
 
 func (b *Block) GetMerkleProof() []byte {

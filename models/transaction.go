@@ -7,3 +7,7 @@ type Transaction struct {
 func NewTransaction(data []byte) *Transaction {
 	return &Transaction{Data: data}
 }
+
+func (t *Transaction) toStr() string {
+	return "Data: " + string(t.Data)
+}

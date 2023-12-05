@@ -24,8 +24,6 @@ func NewBlock(transactions []*Transaction, prevBlockHash []byte) *Block {
 		Hash:          []byte{},
 		MerkleProof:   []byte{},
 	}
-
-	block.SetHash()
 	block.MerkleProof = block.GetMerkleProof()
 
 	return block

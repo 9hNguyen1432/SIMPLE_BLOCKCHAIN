@@ -40,10 +40,10 @@ func main() {
 			fmt.Printf("\x1bc")
 			fmt.Println("=== Latest Block ===")
 			printLatestBlock(blockchain)
-			Blocks:=blockchain.GetBlocks()
-			i:= len(Blocks)-2
-			schoice :="-1"
-			for schoice !="3" {
+			Blocks := blockchain.GetBlocks()
+			i := len(Blocks) - 2
+			schoice := "-1"
+			for schoice != "3" {
 				fmt.Println("1. See block before")
 				fmt.Println("2. Verify this block")
 				fmt.Println("3. Exit")
@@ -52,34 +52,34 @@ func main() {
 				schoiceInput, _ := reader.ReadString('\n')
 				schoice = strings.TrimSpace(schoiceInput)
 				switch schoice {
-					case "1":
-						if i<0 {
-							fmt.Printf("\x1bc")
-							fmt.Println("No block before")
-							
-						}else{
-							fmt.Printf("\x1bc")	
-							fmt.Println("*Block information: \n")
-							printBlock(Blocks[i])
-							i--
-						}
-					case"2":
-					// to do verify block
-					case"3":
-						break
-					default:
-						continue
+				case "1":
+					if i < 0 {
+						fmt.Printf("\x1bc")
+						fmt.Println("No block before")
+
+					} else {
+						fmt.Printf("\x1bc")
+						fmt.Println("*Block information: \n")
+						printBlock(Blocks[i])
+						i--
 					}
-					
+				case "2":
+				// to do verify block
+				case "3":
+					break
+				default:
+					continue
+				}
+
 			}
 		case "3":
 			fmt.Printf("\x1bc")
 			fmt.Println("=== Blockchain ===")
 			// TODO: print all blocks in the blockchain
-			
+
 			printAllBlocks(blockchain)
 			fmt.Print("Press 'Enter' to continue...")
-  			bufio.NewReader(os.Stdin).ReadBytes('\n') 
+			bufio.NewReader(os.Stdin).ReadBytes('\n')
 		case "4":
 			fmt.Println("Exiting...")
 			return
@@ -137,16 +137,16 @@ func addTransactionToBlockchain(blockchain *models.Blockchain, block *models.Blo
 
 func printLatestBlock(blockchain *models.Blockchain) {
 	block := blockchain.GetLatestBlock()
-	fmt.Printf("Block: - time: %d - transaction: %s - Hash: %s - MerkleProof: %s - PrevBlockHash: %s\n", block.Timestamp, block.Transactions, block.Hash, block.MerkleProof, block.PrevBlockHash)
+	printBlock(block)
 }
 
 func printAllBlocks(blockchain *models.Blockchain) {
 	for _, block := range blockchain.GetBlocks() {
-		fmt.Printf("Block: - time: %d - transaction: %s - Hash: %s - MerkleProof: %s - PrevBlockHash: %s\n", block.Timestamp, block.Transactions, block.Hash, block.MerkleProof, block.PrevBlockHash)
+		printBlock(block)
 	}
 }
 
 func printBlock(block *models.Block) {
-	
+
 	fmt.Printf("Block: - time: %d - transaction: %s - Hash: %s - MerkleProof: %s - PrevBlockHash: %s\n", block.Timestamp, block.Transactions, block.Hash, block.MerkleProof, block.PrevBlockHash)
 }

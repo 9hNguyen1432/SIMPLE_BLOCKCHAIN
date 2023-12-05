@@ -65,6 +65,7 @@ func (b *Block) HashTransactions() []byte {
 
 	merkleTree := NewMerkleTree(b.Transactions)
 	// Calculate SHA256 hash
+	b.MerkleProof = merkleTree.RootNode.Data
 	return merkleTree.RootNode.Data
 }
 
@@ -103,4 +104,18 @@ func DisplayTransactions(b *Block) {
 	for index, tx := range b.Transactions {
 		fmt.Printf("\t%d. %s \n", index, tx.toStr())
 	}
+}
+
+func (block *Block) VerifyTransaction(indexTransaction int) bool {
+	// Check if the specified transaction index exists
+	if indexTransaction < 0 || indexTransaction >= len(block.Transactions) {
+		return false
+	}
+
+	// Verify the transaction using the Merkle Tree
+	merkleTree := NewMerkleTree(block.Transactions)
+	rootHash := merkleTree.RootNode.Data
+
+	// Compare the calculated root hash with the stored Merkle Root in the block
+	return string(rootHash) == string(block.MerkleProof)
 }

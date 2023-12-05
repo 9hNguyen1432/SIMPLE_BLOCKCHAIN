@@ -152,6 +152,6 @@ func printAllBlocks(blockchain *models.Blockchain) {
 
 func printBlock(block *models.Block) {
 
-	fmt.Printf("Block: \n-Time: %d \n-Hash: %s \n-MerkleProof: %s \n-PrevBlockHash: %s\n", block.Timestamp, block.Hash, block.MerkleProof, block.PrevBlockHash)
+	fmt.Printf("Block: \n-Time: %d \n-Hash: %s \n-PrevBlockHash: %s\n", block.Timestamp, block.Hash, block.PrevBlockHash)
 	models.DisplayTransactions(block)
 }

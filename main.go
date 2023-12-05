@@ -28,13 +28,9 @@ func main() {
 
 		switch choice {
 		case "1":
-<<<<<<< Updated upstream
+
 			fmt.Printf("\x1bc")
 			fmt.Println("Enter transaction data: ")
-
-=======
-			fmt.Println("Enter transaction data: ")
->>>>>>> Stashed changes
 			// demo menu
 			// TODO: add transaction to blockchain
 			addTransactionToBlockchain(blockchain, inputTransactionData())

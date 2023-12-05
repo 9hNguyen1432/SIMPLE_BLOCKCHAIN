@@ -41,7 +41,7 @@ func main() {
 			fmt.Println("=== Latest Block ===")
 			printLatestBlock(blockchain)
 			Blocks := blockchain.GetBlocks()
-			i := len(Blocks) - 2
+			i := len(Blocks) - 1
 			schoice := "-1"
 			for schoice != "3" {
 				fmt.Println("1. See block before")
@@ -56,15 +56,19 @@ func main() {
 					if i < 0 {
 						fmt.Printf("\x1bc")
 						fmt.Println("No block before")
-
 					} else {
+						i--
 						fmt.Printf("\x1bc")
 						fmt.Println("*Block information: \n")
 						printBlock(Blocks[i])
-						i--
 					}
 				case "2":
-				// to do verify block
+					// to do verify block
+					if Blocks[i].VerifyBlock() {
+						fmt.Println("Block is valid")
+					} else {
+						fmt.Println("Block is not valid")
+					}
 				case "3":
 					break
 				default:

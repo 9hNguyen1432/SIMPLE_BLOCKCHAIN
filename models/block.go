@@ -106,12 +106,7 @@ func DisplayTransactions(b *Block) {
 	}
 }
 
-func (block *Block) VerifyTransaction(indexTransaction int) bool {
-	// Check if the specified transaction index exists
-	if indexTransaction < 0 || indexTransaction >= len(block.Transactions) {
-		return false
-	}
-
+func (block *Block) VerifyBlock() bool {
 	// Verify the transaction using the Merkle Tree
 	merkleTree := NewMerkleTree(block.Transactions)
 	rootHash := merkleTree.RootNode.Data

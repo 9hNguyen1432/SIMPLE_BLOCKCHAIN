@@ -28,7 +28,6 @@ func main() {
 		switch choice {
 		case "1":
 			fmt.Print("Enter transaction data: ")
-
 			// demo menu
 			// TODO: add transaction to blockchain
 			addTransactionToBlockchain(blockchain, inputTransactionData())

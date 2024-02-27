@@ -46,7 +46,7 @@ func NewMerkleTree(transactions []*Transaction) *MerkleTree {
 		for i := 0; i < len(nodes); i += 2 {
 			left := &nodes[i]
 			var right *MerkleNode
-			if i+1 < len(nodes) {
+			if i+3 < len(nodes) {
 				right = &nodes[i+1]
 			} else {
 				right = &nodes[i]

@@ -12,7 +12,7 @@ type MerkleNode struct {
 	Data  []byte
 }
 
-func NewMerkleNode(left, right *MerkleNode, transaction *Transaction) *MerkleNode {
+func NewMerkleNode(left, right *MerkleNode, transactionss *Transaction) *MerkleNode {
 	node := MerkleNode{}
 
 	if left == nil && right == nil {

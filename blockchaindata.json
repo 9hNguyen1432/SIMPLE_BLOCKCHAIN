@@ -9,7 +9,15 @@
       "Hash": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b"
     },
     {
+      "Hash": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b"
+    },
+    {
       "Timestamp": 1638290900,
+      "Transactions": [
+        {"Data": "Transaction 13"},
+        {"Data": "Transaction 42"}
+      ],
+      "PrevBlockHash": 
       "Transactions": [
         {"Data": "Transaction 3"},
         {"Data": "Transaction 4"}

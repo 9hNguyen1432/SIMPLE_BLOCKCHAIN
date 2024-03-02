@@ -7,6 +7,7 @@ type Blockchain struct {
 // TODO: implement this function to add a new block to the blockchain
 func (bc *Blockchain) AddBlock(block *Block) {
 	block.PrevBlockHash = bc.GetLatestBlock().Hash
+	block.SetHash()
 	bc.blocks = append(bc.blocks, block)
 }
 
@@ -29,6 +30,7 @@ func NewGenesisBlock(genesisData []byte) *Block {
 
 	// Create the Genesis block
 	genesisBlock := NewBlock([]*Transaction{NewTransaction(genesisData)}, emptyPrevBlockHash)
+	genesisBlock.SetHash()
 
 	return genesisBlock
 }
